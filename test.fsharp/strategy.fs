@@ -5,7 +5,7 @@ module Animal =
        member this.Name = name
        member this.Noise = noiseMakingStrategy()
        member this.MakeNoise = 
-           printfn "%s is %s" this.Name this.Noise 
+           printfn "%s is %s" this.Name this.Noise  
 
     // now create a cat 
     let cat = AnimalBase("Chloe", fun _ ->  "meowing")

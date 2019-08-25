@@ -59,3 +59,45 @@ dog.MakeNoise
 //try again a second laterdog.MakeNoise 
 dog.MakeNoise
 
+// test 9: function lists
+#load "functionList.fs"
+open test.fsharp.FunctionList
+
+square 5.0
+traceSquare 5.0
+
+
+// test 10: mapreduce
+#load "wordcount.fs"
+open test.fsharp.WordCount
+
+["test";"test";"hello";"hello"] |> List.map wordCountMap;;
+
+let t1 = ["test";"test";"hello";"hello"] |> List.map wordCountMap;;
+let t2 = t1 |> Seq.groupBy fst |> Seq.map (fun(x,y) -> x, Seq.map snd y);;
+let t3 = t2 |> Seq.map (fun(x,y) -> x, y |> Seq.sum);;
+
+
+// test 11: mapreduce copy
+// https://thecodedecanter.wordpress.com/2010/05/24/implementing-map-reduce-in-f-sharp/
+#load "mapreduce.fs"
+open test.fsharp.MapReduceExample
+
+// Run the example...
+let alice = ("Alice",["Dog";"Cat"])
+let bob = ("Bob",["Cat"])
+let charlie = ("Charlie",["Mouse"; "Cat"; "Dog"])
+let dennis = ("Dennis",[])
+ 
+let people = [alice;bob;charlie;dennis]
+ 
+let results = people |> mapreduce mapfunc reducefunc
+ 
+for result in results do
+    let animal = fst result
+    let count = ((snd result) |> Seq.toArray).[0]
+    printfn "%s : %s" animal (count.ToString())
+ 
+printfn "Press any key to exit."
+ 
+System.Console.ReadKey() |> ignore
