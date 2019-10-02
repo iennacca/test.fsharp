@@ -101,3 +101,63 @@ for result in results do
 printfn "Press any key to exit."
  
 System.Console.ReadKey() |> ignore
+
+
+// test 12: message-based IO
+#load "messageIO.fs"
+open test.fsharp.messageIO
+
+// test in isolation
+slowConsoleWrite "abc"
+
+// test in isolation
+let makeTask logger taskId = async {
+    let name = sprintf "Task%i" taskId
+    for i in [1..3] do 
+        let msg = sprintf "-%s:Loop%i-" name i
+        logger msg 
+    }
+
+let task = makeTask slowConsoleWrite 1
+Async.RunSynchronously task
+
+// test in isolation
+let unserializedLogger = UnserializedLogger()
+unserializedLogger.Log "hello"
+
+// test in isolation
+let serializedLogger = SerializedLogger()
+serializedLogger.Log "hello"
+
+let unserializedExample = 
+    let logger = new UnserializedLogger()
+    [1..5]
+        |> List.map (fun i -> makeTask logger.Log i)
+        |> Async.Parallel
+        |> Async.RunSynchronously
+        |> ignore
+
+let serializedExample = 
+    let logger = new SerializedLogger()
+    [1..5]
+        |> List.map (fun i -> makeTask logger.Log i)
+        |> Async.Parallel
+        |> Async.RunSynchronously
+        |> ignore
+
+
+// test 13: bind! and let!
+#load "divideByExplicit.fs"
+open test.fsharp
+
+// test
+let good = DivideByExplicit.divideByWorkflow 12 3 2 1
+let bad = DivideByExplicit.divideByWorkflow 12 3 0 1
+
+#load "divideByBind.fs"
+open test.fsharp
+
+// test
+let good = DivideByBind.divideByWorkflow 12 3 2 1
+let bad = DivideByBind.divideByWorkflow 12 3 0 1
+

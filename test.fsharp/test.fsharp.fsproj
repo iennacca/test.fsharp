@@ -4,9 +4,18 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="test.fsharp.fs" />
     <None Include="Script.fsx" />
+    <Compile Include="divideByBind.fs" />
+    <Compile Include="divideByExplicit.fs" />
+    <Compile Include="download.fs" />
     <Compile Include="functionList.fs" />
+    <Compile Include="mapreduce.fs" />
+    <Compile Include="messageIO.fs" />
+    <Compile Include="piglatin.fs" />
+    <Compile Include="quicksort.fs" />
+    <Compile Include="shapes.fs" />
+    <Compile Include="strategy.fs" />
+    <Compile Include="wordcount.fs" />
   </ItemGroup>
   <Import Project="..\.paket\Paket.Restore.targets" />
 </Project>
