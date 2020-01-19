@@ -390,4 +390,8 @@ paket-files/
 .idea/
 *.sln.iml
 
+<<<<<<< HEAD
 .ionide/symbolCache.db
+=======
+**/.ionide/*
+>>>>>>> 724484c17ce9ce39b8ebc1564e03b98b55183b58
