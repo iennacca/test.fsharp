@@ -1,3 +1,5 @@
+// loosely follows the "Why use F#" series
+
 #if !FAKE
   #r "netstandard" // windows
   #r "Facades/netstandard" // mono
