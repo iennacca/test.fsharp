@@ -1,3 +1,8 @@
+#if !FAKE
+  #r "netstandard" // windows
+  #r "Facades/netstandard" // mono
+#endif
+
 // test 1: open function: open single module (PigLatin)
 #load "piglatin.fs"
 open test.fsharp
@@ -56,7 +61,8 @@ open test.fsharp.Animal
 
 cat.MakeNoise
 dog.MakeNoise
-//try again a second laterdog.MakeNoise 
+//try again a second later
+dog.MakeNoise 
 dog.MakeNoise
 
 // test 9: function lists
@@ -99,7 +105,7 @@ for result in results do
     printfn "%s : %s" animal (count.ToString())
  
 printfn "Press any key to exit."
- 
+
 System.Console.ReadKey() |> ignore
 
 
@@ -151,13 +157,23 @@ let serializedExample =
 open test.fsharp
 
 // test
-let good = DivideByExplicit.divideByWorkflow 12 3 2 1
-let bad = DivideByExplicit.divideByWorkflow 12 3 0 1
+let good1 = DivideByExplicit.divideByWorkflow 12 3 2 1
+let bad1 = DivideByExplicit.divideByWorkflow 12 3 0 1
 
 #load "divideByBind.fs"
 open test.fsharp
 
 // test
-let good = DivideByBind.divideByWorkflow 12 3 2 1
-let bad = DivideByBind.divideByWorkflow 12 3 0 1
+let good2 = DivideByBind.divideByWorkflow 12 3 2 1
+let bad2 = DivideByBind.divideByWorkflow 12 3 0 1
 
+// test 14: quicksort review
+let quicksort listValues = 
+  match listValues with
+    | [] -> 
+      printfn"%A" []
+    | value::restOfValues -> 
+      let smallerValues = List.filter (fun x -> x < value) restOfValues
+  
+quicksort []
+quicksort [1;4;5;6;2;4]

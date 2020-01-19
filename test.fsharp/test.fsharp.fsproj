@@ -4,7 +4,6 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="Script.fsx" />
     <Compile Include="divideByBind.fs" />
     <Compile Include="divideByExplicit.fs" />
     <Compile Include="download.fs" />
@@ -16,6 +15,8 @@
     <Compile Include="shapes.fs" />
     <Compile Include="strategy.fs" />
     <Compile Include="wordcount.fs" />
+    <Compile Include="Script.fsx" />
+    <Compile Include="Examples.fsx" />
   </ItemGroup>
   <Import Project="..\.paket\Paket.Restore.targets" />
 </Project>
