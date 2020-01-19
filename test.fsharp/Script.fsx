@@ -69,9 +69,9 @@ dog.MakeNoise
 #load "functionList.fs"
 open test.fsharp.FunctionList
 
+let square x = x * x
 square 5.0
-traceSquare 5.0
-
+traceOp square  5.0
 
 // test 10: mapreduce
 #load "wordcount.fs"
