@@ -15,7 +15,8 @@ module Sorter =
                 |> List.filter (fun e -> e >= firstElem)
                 |> quicksort              // and sort them
             // Combine the 3 parts into a new list and return it
-            List.concat [smallerElements; [firstElem]; largerElements]
+            // List.concat [smallerElements; [firstElem]; largerElements]
+            smallerElements @ [firstElem] @ largerElements
 
     let rec quicksort2 = function
        | [] -> []                         

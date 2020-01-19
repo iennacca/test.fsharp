@@ -169,13 +169,4 @@ open test.fsharp
 let good2 = DivideByBind.divideByWorkflow 12 3 2 1
 let bad2 = DivideByBind.divideByWorkflow 12 3 0 1
 
-// test 14: quicksort review
-let quicksort listValues = 
-  match listValues with
-    | [] -> 
-      printfn"%A" []
-    | value::restOfValues -> 
-      let smallerValues = List.filter (fun x -> x < value) restOfValues
-  
-quicksort []
-quicksort [1;4;5;6;2;4]
+
