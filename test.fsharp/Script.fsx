@@ -1,30 +1,32 @@
-// loosely follows the "Why use F#" series
+// Loosely follows the "Why use F#" series
+// https://fsharpforfunandprofit.com/posts/why-use-fsharp-intro/
+
 
 #if !FAKE
-  #r "netstandard" // windows
-  #r "Facades/netstandard" // mono
+    #r "netstandard" // windows
+    #r "Facades/netstandard" // mono
 #endif
 
-// test 1: open function: open single module (PigLatin)
+// TEST: open function: open single module (PigLatin)
 #load "piglatin.fs"
 open test.fsharp
 PigLatin.toPigLatin "test"
 
 
-// test 2: open function: open single module (Sorter)
+// TEST: open function: open single module (Sorter)
 #load "quicksort.fs"
 open test.fsharp
 printfn "%A" (Sorter.quicksort [1;5;23;18;9;1;3]);;
 printfn "%A" (Sorter.quicksort2 ["test";"hello";"maniac";"vermin"])
 
 
-// test 3: open function: open single module (WebPageDownloader)
+// TEST: open function: open single module (WebPageDownloader)
 #load "download.fs"
 open test.fsharp.WebPageDownloader
 // let google = fetchUrl myCallback "http://google.com"
 
 
-// test 4: open function: open 3 modules, open a specific module (WebPageDownloader)
+// TEST: open function: open 3 modules, open a specific module (WebPageDownloader)
 #load "piglatin.fs"
 #load "quicksort.fs"
 #load "download.fs"
@@ -32,7 +34,7 @@ open test.fsharp.WebPageDownloader
 let google = fetchUrl myCallback "http://google.com"
 
 
-// test 5: polymorphism
+// TEST:  polymorphism
 #load "shapes.fs"
 open test.fsharp.Shapes
 let circle = Circle(10)
@@ -42,7 +44,7 @@ let point = Point(2,3)
 [circle; rect; polygon; point] |> List.iter draw
 
 
-// test 6: using discriminated unions
+// TEST: using discriminated unions
 type EmailAddress = EmailAddress of string
 type CreationResult<'T> = Success of 'T | Error of string            
 let CreateEmailAddress2 (s:string) = 
@@ -52,12 +54,21 @@ let CreateEmailAddress2 (s:string) =
 CreateEmailAddress2 "example.com"
 
 
-// test 7: option type
+// TEST: option type
 [1;2;3;4]  |> List.tryFind (fun x-> x = 3)  // Some 3
 [1;2;3;4]  |> List.tryFind (fun x-> x = 10) // None
 
 
-// test 8: strategy pattern using functions
+// TEST: using functions to extract boilerplate code
+let values = [1..5]
+let seed = 1
+let action accumulator newValue = accumulator * newValue
+values |> List.fold action seed
+values |> List.reduce (*)
+values |> List.reduce (+)
+
+
+// TEST: strategy pattern using functions
 #load "strategy.fs"
 open test.fsharp.Animal
 
@@ -67,7 +78,19 @@ dog.MakeNoise
 dog.MakeNoise 
 dog.MakeNoise
 
-// test 9: function lists
+
+// TEST: >> function composition
+let square x = x * x
+let showResult x = printfn "result: %A" x; x
+let squareShow = square >> showResult
+let squareShowTwice = squareShow >> squareShow
+
+square 5
+squareShow 10
+squareShowTwice 5
+
+
+// TEST: function lists
 #load "functionList.fs"
 open test.fsharp.FunctionList
 
@@ -75,7 +98,10 @@ let square x = x * x
 square 5.0
 traceOp square  5.0
 
-// test 10: mapreduce
+
+
+
+// TEST: mapreduce
 #load "wordcount.fs"
 open test.fsharp.WordCount
 
@@ -86,7 +112,7 @@ let t2 = t1 |> Seq.groupBy fst |> Seq.map (fun(x,y) -> x, Seq.map snd y);;
 let t3 = t2 |> Seq.map (fun(x,y) -> x, y |> Seq.sum);;
 
 
-// test 11: mapreduce copy
+// TEST: mapreduce copy
 // https://thecodedecanter.wordpress.com/2010/05/24/implementing-map-reduce-in-f-sharp/
 #load "mapreduce.fs"
 open test.fsharp.MapReduceExample
@@ -107,11 +133,10 @@ for result in results do
     printfn "%s : %s" animal (count.ToString())
  
 printfn "Press any key to exit."
-
 System.Console.ReadKey() |> ignore
 
 
-// test 12: message-based IO
+// TEST: message-based IO
 #load "messageIO.fs"
 open test.fsharp.messageIO
 
@@ -154,19 +179,30 @@ let serializedExample =
         |> ignore
 
 
-// test 13: bind! and let!
+// TEST: bind! and let!
 #load "divideByExplicit.fs"
 open test.fsharp
-
+  
 // test
 let good1 = DivideByExplicit.divideByWorkflow 12 3 2 1
 let bad1 = DivideByExplicit.divideByWorkflow 12 3 0 1
-
+  
 #load "divideByBind.fs"
 open test.fsharp
-
+  
 // test
 let good2 = DivideByBind.divideByWorkflow 12 3 2 1
 let bad2 = DivideByBind.divideByWorkflow 12 3 0 1
+  
+  
+// TEST: wordcount
+open System.Text.RegularExpressions
+
+let text = "This is a test. This is another test."
+let textValues = 
+    Regex.Matches(text.ToLowerInvariant(), @"\w+('\w+)*") 
+        |> Seq.cast<Match> 
+        |> Seq.countBy (fun m -> m.Value)
+printfn "%A" textValues
 
 
