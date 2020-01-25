@@ -45,10 +45,20 @@ let results = List.choose (fun elem ->
     | _ -> None) listWords
 printfn "%A" results
 
-// TEST: reduce
-let values = [1..5]
-values |> List.reduce (*)
 
-// TEST: Fibonacci sequence
+// TEST: List.filter
+let filterValues = [1..10]
+List.filter (fun x -> x % 2 = 0) filterValues
+
+
+// TEST: List.fold
+let foldValues = [1..10]
+let acc = 0
+foldValues |> List.fold (+) acc 
+
+// TEST: List.reduce
+let reduceValues = [1..10]
+reduceValues |> List.reduce (+)
+
 
 
