@@ -204,5 +204,3 @@ let textValues =
         |> Seq.cast<Match> 
         |> Seq.countBy (fun m -> m.Value)
 printfn "%A" textValues
-
-
