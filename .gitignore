@@ -389,3 +389,5 @@ paket-files/
 
 # Symbol cache for Ionide VSCode extension
 .ionide/symbolCache.db
+
+.ionide
