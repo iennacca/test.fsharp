@@ -89,6 +89,10 @@ square 5
 squareShow 10
 squareShowTwice 5
 
+let log x = printfn "%A" x; x
+let square (x:float) = x * x
+let logsquare = log >> square >> log
+
 
 // TEST: function lists
 #load "functionList.fs"
@@ -97,8 +101,6 @@ open test.fsharp.FunctionList
 let square x = x * x
 square 5.0
 traceOp square  5.0
-
-
 
 
 // TEST: mapreduce
