@@ -1,9 +1,8 @@
 // Thinking functionally series (bind)
 // https://fsharpforfunandprofit.com/posts/computation-expressions-bind/
 
-
-// TEST: Different bind approaches
 open System
+
 
 let strToInt (s:string) = 
     try
