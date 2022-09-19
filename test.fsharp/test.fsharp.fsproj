@@ -4,19 +4,19 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="CityLocationRecord.fs" />
-    <Compile Include="CityLocationUnion.fs" />
-    <Compile Include="divideByBind.fs" />
-    <Compile Include="divideByExplicit.fs" />
-    <Compile Include="download.fs" />
-    <Compile Include="functionList.fs" />
-    <Compile Include="mapreduce.fs" />
-    <Compile Include="messageIO.fs" />
-    <Compile Include="piglatin.fs" />
-    <Compile Include="quicksort.fs" />
-    <Compile Include="shapes.fs" />
-    <Compile Include="strategy.fs" />
-    <Compile Include="wordcount.fs" />
+    <Compile Include="CityLocation/CityLocationRecord.fs" />
+    <Compile Include="CityLocation/CityLocationUnion.fs" />
+    <Compile Include="Usage/dividebyBind.fs" />
+    <Compile Include="Usage/dividebyExplicit.fs" />
+    <Compile Include="Usage/download.fs" />
+    <Compile Include="Usage/functionList.fs" />
+    <Compile Include="Usage/mapreduce.fs" />
+    <Compile Include="Usage/messageIO.fs" />
+    <Compile Include="Usage/piglatin.fs" />
+    <Compile Include="Usage/quicksort.fs" />
+    <Compile Include="Usage/shapes.fs" />
+    <Compile Include="Usage/strategy.fs" />
+    <Compile Include="Usage/wordcount.fs" />
   </ItemGroup>
   <Import Project="..\.paket\Paket.Restore.targets" />
 </Project>

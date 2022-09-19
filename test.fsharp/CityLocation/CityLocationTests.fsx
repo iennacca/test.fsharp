@@ -1,4 +1,7 @@
+#if INTERACTIVE
 #load "CityLocationUnion.fs"
+#endif
+
 open CityLocationUnion
 
 // let tcity = "London", "51.5074N", "0.1278W"    
@@ -13,7 +16,10 @@ showCoordinates l
 
 // ------------------
 
+#if INTERACTIVE
 #load "CityLocationRecord.fs"
+#endif
+
 open CityLocationRecord
 
 // let tcity = "London", "51.5074N", "0.1278W"    

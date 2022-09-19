@@ -206,3 +206,28 @@ let textValues =
         |> Seq.cast<Match> 
         |> Seq.countBy (fun m -> m.Value)
 printfn "%A" textValues
+
+
+// TEST: wordcount exercise
+#load "wordcount.fs"
+open test.fsharp
+
+let sourceText = "This is a test. This is another what the heck test."
+let strValues = WordCount.tokenizeText sourceText
+
+strValues |> Seq.countBy id |> Seq.iter (fun v -> printfn "%A" v)
+let mv = strValues |> WordCount.mapValues
+let rv = strValues |> WordCount.reduceValues
+
+// TEST: int value operations
+let intValues = {1..10}
+
+// TEST: Seq.map vs Seq.iter??
+intValues |> Seq.map WordCount.printValue
+intValues |> Seq.iter WordCount.printValue
+
+intValues |> WordCount.printValue
+intValues |> Seq.toList |> List.map WordCount.printValue
+
+for s in strValues do
+  printfn "%A" s
