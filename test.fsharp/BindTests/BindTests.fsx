@@ -38,3 +38,7 @@ let strAdd str i =
 
 let good2 = strToInt "1" >>= strAdd "2" >>= strAdd "3"
 let bad2 = strToInt "1" >>= strAdd "xyz" >>= strAdd "3"
+
+let stringAddInfixFlow x y z = 
+    strToInt x >>= strAdd y >>= strAdd z
+
