@@ -1,46 +1,37 @@
-module Domain
+namespace Domain
     open System
     
-    type SSN = 
-        { Number: string }
-        member this.validate input =
-            printfn "%s" input 
-            ignore
+    type SSN private (ssn: string) =  
+        let _ssn = ssn
 
-    type Person = 
-        { 
-            FirstName: string
-            LastName: string
-            BirthDate: DateTime
-            SSN: string
-        }
-
-        static member Default = {
-            FirstName = "Test"
-            LastName ="Testing"
-            BirthDate = Convert.ToDateTime("1/1/2000")
-            SSN = "111-11-1111"
-        }
-
-        member this.FullName = this.FirstName + " " + this.LastName
+        static member Create (ssn: string) =
+            if Text.RegularExpressions.Regex.IsMatch(s,@"^(?!666|000|9\\d{2})\\d{3}-(?!00)\\d{2}-(?!0{4})\\d{4}$")
+                then Ok (SSN(ssn))
+                else Error "SSN entry is invalid."
+        
+        member this.ToString() = _ssn
 
 
-    let validateFirstName firstname = 
-        if  String.length firstname > 0 then
-            Ok firstname
-        else
-            Error "First name cannot be empty"
+    type Person private (firstName: string, lastName: string, birthdate: string, ssn: string) = 
+        let _firstname = firstName
+        let _lastname = lastName
+        let _birthdate = Convert.ToDateTime(birthdate)
+        let _ssn = SSN.Create(ssn)
 
-    let validateLastName lastname = 
-        if  String.length lastname > 0 then
-            Ok lastname
-        else
-            Error "First name cannot be empty"
+        member this.FullName() = _firstname + " " + _lastname
 
-    let printPerson person = 
-        $"Person:
-            FirstName: {person.FirstName}
-            LastName: {person.LastName}
-            SSN: {person.SSN}"
+        member this.ToString() =
+            $"Person:
+                FirstName: {_firstname}
+                LastName: {_lastname}
+                SSN: {_ssn.ToString()}"
 
-    type Persons = Person list
+        let validateName name = 
+            Ok name
+
+        static member Create (firstname:string, lastname:string, birthdate:string, ssn:string) = 
+            validateName firstname |> 
+            validateName lastname |> 
+            
+            Ok Person(firstname, lastname, birthdate, ssn)
+

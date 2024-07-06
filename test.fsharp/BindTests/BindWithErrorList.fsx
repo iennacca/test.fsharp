@@ -10,6 +10,7 @@ type ResultBuilder () =
         match m with
         | Error e ->
             printfn "Error: %A" e
+            e
         | Ok a ->
             printfn "Binding with Some(%A). Continuing" a
         Result.bind f m

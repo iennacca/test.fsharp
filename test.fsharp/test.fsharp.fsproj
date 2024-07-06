@@ -4,8 +4,8 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="GrokTests\ResultBuilder.fs" />
     <Compile Include="GrokTests\Person.fs" />
-    <Compile Include="GrokkingFP\Person.fs" />
     <Compile Include="CityLocation/CityLocationRecord.fs" />
     <Compile Include="CityLocation/CityLocationUnion.fs" />
     <Compile Include="Usage/dividebyBind.fs" />
