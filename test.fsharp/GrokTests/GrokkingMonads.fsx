@@ -9,9 +9,7 @@ open GrokTests.Domain
 
 let persons = result {
     let! p1 = Person.Create ("Jerry", "Chaves", "01/01/1999", "553-91-9595")
-
     let! p2 = Person.Create ("Cameron", "Chaves", "09/06/2012", "333-33-3333")
-
     let! p3 = Person.Create ("Karen", "Chaves", "09/06/2012", "111-11-4444")
     let! p4 = Person.Create ("Deckard", "Chaves", "09/18/2016", "444-44-4444")
 
