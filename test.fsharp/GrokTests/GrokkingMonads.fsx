@@ -1,7 +1,6 @@
 // Grokking Monads: Test project from 
 // https://dev.to/choc13/grokking-functors-bla
 
-
 #load "ResultBuilder.fs" "Person.fs"
 
 open GrokTests.Core
@@ -21,15 +20,17 @@ let personlist =
     | Ok l -> l
     | Error _ -> failwith "Whoops"
 
-
 let personsWithShortCiruitedErrors = result {
+    printfn "p1"
     let! p1 = Person.Create ("", "Chaves", "01/01/1999", "")
+    printfn "p2"
     let! p2 = Person.Create ("", "Chaves", "09/06/2012", "333-33-3333")
     return [p1; p2]
 }
 
 let personsWithCollatedErrors = result {
+    printfn "p1"
     let! p1 = Person.Create ("", "Chaves", "01/01/1999", "")
     and! p2 = Person.Create ("", "Chaves", "09/06/2012", "333-33-3333")
-    return [p1, p2]
+    return [p1; p2]
 }
