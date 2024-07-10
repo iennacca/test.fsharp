@@ -2,17 +2,13 @@
 /// https://dev.to/choc13/grokking-functors-bla 
 
 
-#load "Person.fs"
+#load "ResultBuilder.fs" "Person.fs"
 
 open System
-open Domain
+open GrokTests.Core
+open GrokTests.Domain
 
-let p = { 
-    FirstName = "Jerry"
-    LastName = "Chaves"
-    BirthDate = Convert.ToDateTime("01/01/1999")
-    SSN = "111-11-1111"
+let person = result {
+    return! Person.Create ("Jerry", "Chaves", "01/01/1999", "553-91-9595")
 }
 
-
-validateFirstName p.FirstName
