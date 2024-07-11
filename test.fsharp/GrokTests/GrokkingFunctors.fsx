@@ -8,7 +8,7 @@ open System
 open GrokTests.Core
 open GrokTests.Domain
 
-let person = result {
+let person = result { 
     return! Person.Create ("Jerry", "Chaves", "01/01/1999", "553-91-9595")
 }
 
